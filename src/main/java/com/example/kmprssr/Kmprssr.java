@@ -6,9 +6,12 @@ import reactor.core.publisher.Flux;
 
 public class Kmprssr implements Function<Flux<String>, Flux<String>> {
 
+	private int i;
+
 	@Override
 	public Flux<String> apply(Flux<String> input) {
-		return input.map(s -> s.replaceAll("[aeiouâãäåæèéêëıìíîïðñòóôõøùúûü]*", ""));
+		i++;
+		return input.map(s -> "Invocation " + i + s.replaceAll("[aeiouâãäåæèéêëıìíîïðñòóôõøùúûü]*", ""));
 	}
 
 }
