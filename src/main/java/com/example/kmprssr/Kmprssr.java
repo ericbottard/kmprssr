@@ -11,7 +11,9 @@ public class Kmprssr implements Function<Flux<String>, Flux<String>> {
 	@Override
 	public Flux<String> apply(Flux<String> input) {
 		i++;
-		return input.map(s -> "Invocation " + i + s.replaceAll("[aeiouâãäåæèéêëıìíîïðñòóôõøùúûü]*", ""));
+		return input
+				.window(3)
+				.concatMap(ss -> Flux.just("Invocation " + i + " " + ss.map(s -> s.replaceAll("[aeiouâãäåæèéêëıìíîïðñòóôõøùúûü]*", "")).reduce((a, b) -> a + " " + b)));
 	}
 
 }
