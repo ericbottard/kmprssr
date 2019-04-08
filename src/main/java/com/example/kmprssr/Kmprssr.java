@@ -17,9 +17,5 @@ public class Kmprssr implements Function<Flux<String>, Flux<String>> {
 				.concatMap(ss -> ss.map(s -> s.replaceAll("[aeiouâãäåæèéêëıìíîïðñòóôõøùúûü]*", "")).reduce("Invocation " + i + "", (a, b) -> a + " " + b));
 	}
 
-	public static void main(String[] args) throws IOException {
-		new Kmprssr().apply(Flux.just("riff", "is", "for", "functions")).subscribe(System.out::println);
-		System.in.read();
-	}
 
 }
